@@ -1,0 +1,80 @@
+﻿using Fiap.Exemplo02.Dominio.Models;
+using Fiap.Exemplo02.Persistencia.Repositories;
+using System;
+
+namespace Fiap.Exemplo02.MVC.Web.UnitsOfWork
+{
+    public class UnitOfWork : IDisposable
+    {
+        #region Fields
+
+        private Entities _context = new Entities();
+
+        private IGenericRepository<Grupo> _grupoRepository;
+
+        private IGenericRepository<Aluno> _alunoRepository;
+
+        private IProfessorRepository _professorRepository;
+
+        #endregion
+
+        #region Gets
+
+        public IProfessorRepository ProfessorRepository
+        {
+            get
+            {
+                if (_professorRepository == null)
+                {
+                    _professorRepository = new ProfessorRepository(_context);
+                }
+                return _professorRepository;
+            }
+        }
+
+        public IGenericRepository<Grupo> GrupoRepository
+        {
+            get
+            {
+                if (_grupoRepository == null)
+                {
+                    _grupoRepository = new GenericRepository<Grupo>(_context);
+                }
+                return _grupoRepository;
+            }
+        }
+
+
+        public IGenericRepository<Aluno> AlunoRepository
+        {
+            get
+            {
+                if (_alunoRepository == null)
+                {
+                    _alunoRepository = new GenericRepository<Aluno>(_context);
+                }
+                return _alunoRepository;
+            }
+        }
+
+        #endregion
+
+        public void Salvar()
+        {
+            _context.SaveChanges();
+        }
+
+        #region Dispose
+
+        public void Dispose()
+        {
+            if (_context != null)
+            {
+                _context.Dispose();
+            }
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
+    }
+}
