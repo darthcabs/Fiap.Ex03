@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista dos melhores alunos</h2>
+
+<div class="container">
+    <h3>Novo Aluno</h3>
+    <div class="row">
+        <label>Nome</label>
+        <input type="text" name="nome" class="form-control" id="txtNome"/>
+    </div>
+    <div class="row">
+        <label>Data de Nascimento</label>
+        <input type="text" name="dataNascimento" class="form-control" id="txtDataNascimento" />
+    </div>
+    <div class="row">
+        <label>Grupo Id</label>
+        <input type="text" name="grupoId" class="form-control" id="txtGrupoId"/>
+    </div>
+    <div class="row">
+        <label>Desconto (em %)</label>
+        <input type="text" name="desconto" class="form-control" id="txtDesconto"/>
+    </div>
+    <div class="row">
+        <input type="checkbox" name="bolsa" id="txtBolsa"/><label> Bolsa</label>
+    </div>
+
+    <div class="row">
+        <button id="btnEnviar" class="btn btn-primary">Enviar</button>
+    </div>
+</div>
+<br />
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Bolsa</th>
+            <th>Desconto</th>
+            <th>Data Nascimento</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section scripts{
+<script>
+    $().ready(function () {
+        listar();
+    })
+
+    function listar() {
+        $.ajax({
+            url: "http://localhost:58692/api/aluno/",
+            method: "GET",
+            success: function (data) {
+                $("tbody").empty();
+                $.each(data, function (index, item) {
+                    //Criar uma nova linha
+                    var linha = $("<tr>");
+                    linha.append($("<td>").text(item.Nome));
+                    linha.append($("<td>").text(item.Bolsa));
+                    linha.append($("<td>").text(item.Desconto));
+                    linha.append($("<td>").text(item.DataNascimento));
+
+                    $("tbody").append(linha);
+                });
+            }
+        })
+    }
+
+    $("#btnEnviar").click(function () {
+        $.ajax({
+            url: "http://localhost:58692/api/aluno/",
+            type: "POST",
+            dataType: "json",
+            data: {
+                nome: $("#txtNome").val(),
+                desconto: $("#txtDesconto").val(),
+                bolsa: $("#txtBolsa").is(":checked"),
+                grupoId: $("#txtGrupoId").val(),
+                dataNascimento: $("#txtDataNascimento").val()
+            },
+            success: function (data, statusString, xhr) {
+                listar();
+            },
+            error: function (data, statusString, xhr) {
+                alert(xhr);
+            }
+        });
+    });
+</script>
+}
