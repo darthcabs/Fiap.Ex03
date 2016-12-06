@@ -38,7 +38,7 @@ namespace Fiap.Exemplo02.Service.Controllers
                 _unit.Salvar();
 
                 var uri = Url.Link("DefaultApi", new { id = aluno.Id });
-                return Ok();
+                return Created<Aluno>(new Uri(uri), aluno);
             }
             else
             {

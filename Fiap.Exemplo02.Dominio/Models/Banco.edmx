@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Fiap.Exemplo02.DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Fiap.Exemplo02.Dominio.Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Aluno">
           <Key>
             <PropertyRef Name="Id" />
@@ -102,7 +102,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FiapExemplo02DatabaseModelStoreContainer">
+        <EntityContainer Name="FiapExemplo02DominioModelsStoreContainer">
           <EntitySet Name="Aluno" EntityType="Self.Aluno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grupo" EntityType="Self.Grupo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Professor" EntityType="Self.Professor" Schema="dbo" store:Type="Tables" />
@@ -129,7 +129,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Fiap.Exemplo02.DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Fiap.Exemplo02.Dominio.Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Aluno">
           <Key>
             <PropertyRef Name="Id" />
@@ -228,9 +228,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FiapExemplo02DatabaseModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="FiapExemplo02DominioModelsStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Aluno">
-            <EntityTypeMapping TypeName="Fiap.Exemplo02.DatabaseModel.Aluno">
+            <EntityTypeMapping TypeName="Fiap.Exemplo02.Dominio.Models.Aluno">
               <MappingFragment StoreEntitySet="Aluno">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
@@ -245,7 +245,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Grupo">
-            <EntityTypeMapping TypeName="Fiap.Exemplo02.DatabaseModel.Grupo">
+            <EntityTypeMapping TypeName="Fiap.Exemplo02.Dominio.Models.Grupo">
               <MappingFragment StoreEntitySet="Grupo">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
@@ -254,7 +254,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Professor">
-            <EntityTypeMapping TypeName="Fiap.Exemplo02.DatabaseModel.Professor">
+            <EntityTypeMapping TypeName="Fiap.Exemplo02.Dominio.Models.Professor">
               <MappingFragment StoreEntitySet="Professor">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
@@ -263,7 +263,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Projeto">
-            <EntityTypeMapping TypeName="Fiap.Exemplo02.DatabaseModel.Projeto">
+            <EntityTypeMapping TypeName="Fiap.Exemplo02.Dominio.Models.Projeto">
               <MappingFragment StoreEntitySet="Projeto">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
@@ -274,7 +274,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="ProfessorAluno" TypeName="Fiap.Exemplo02.DatabaseModel.ProfessorAluno" StoreEntitySet="ProfessorAluno">
+          <AssociationSetMapping Name="ProfessorAluno" TypeName="Fiap.Exemplo02.Dominio.Models.ProfessorAluno" StoreEntitySet="ProfessorAluno">
             <EndProperty Name="Aluno">
               <ScalarProperty Name="Id" ColumnName="AlunoId" />
             </EndProperty>
