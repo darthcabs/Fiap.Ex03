@@ -2,6 +2,7 @@
 using Fiap.Exemplo02.Persistencia.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Data.Entity.Infrastructure;
 
 namespace Fiap.Exemplo02.Persistencia.Test
 {
@@ -19,6 +20,7 @@ namespace Fiap.Exemplo02.Persistencia.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(DbUpdateException))]
         public void Cadastrar_Ok()
         {
             Aluno alu = new Aluno()
@@ -26,11 +28,14 @@ namespace Fiap.Exemplo02.Persistencia.Test
                 Nome = "John Connor",
                 DataNascimento = Convert.ToDateTime("01/01/1970"),
                 Desconto = 10,
-                Grupo = new Grupo() { Nome = "Grupo Teste"}
+                GrupoId = 8
             };
 
             _repository.Cadastrar(alu);
-            _context.SaveChanges();
+            var ret = _context.SaveChanges();
+
+//            Assert.AreEqual(2, ret);        //Valida a quantidade de registros afetados pelo commit (2 - Aluno e Grupo)
+//            Assert.AreNotEqual(alu.Id, 0);  //Valida se foi gerada uma chave no banco de dados
         }
     }
 }

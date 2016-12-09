@@ -23,6 +23,7 @@ namespace Fiap.Exemplo02.Persistencia.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(Exception))]
         public void Calcular_Fatorial_Negativo()
         {
             Calculadora calc = new Calculadora();
